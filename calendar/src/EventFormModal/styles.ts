@@ -3,8 +3,8 @@ import { makeStyles, createStyles } from '@mui/styles';
 export const useStyles = makeStyles(() =>
   createStyles({
     title: {
-      fontWeight: 700,
-      fontSize: '24px'
+      fontWeight: '700 !important',
+      fontSize: '24px !important'
     },
 
     subtitle: {
