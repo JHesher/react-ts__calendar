@@ -11,6 +11,10 @@ import { IActionOfModal, IEvent } from '../CalendarPage/CalendarPage';
 import { getStorageData } from '../functions';
 import { useStyles } from './styles';
 
+// case for REST API
+// import { addNewEventAPI, editEventAPI, getAllEventsAPI, removeEventAPI } from '../api';  
+// import { setGlobalState } from '../useGlobalState';
+
 type IProps = {
   action: IActionOfModal,
   selectedEvent: IEvent | null,
@@ -121,6 +125,26 @@ export const EventFormModal: React.FC<IProps> = ({
     setOpen(false);
     reset();
   };
+
+  // case for REST API
+
+  // const addNewEvent = async (data: any) => {
+  //   await addNewEventAPI(data);
+  //   const responce = await getAllEventsAPI();
+  //   setGlobalState('events', responce);
+  // };
+
+  // const editEvent = async (data: any) => {
+  //   await editEventAPI(data);
+  //   const responce = await getAllEventsAPI();
+  //   setGlobalState('events', responce);
+  // };
+
+  // const removeEvent = async (data: any) => {
+  //   await removeEventAPI(data);
+  //   const responce = await getAllEventsAPI();
+  //   setGlobalState('events', responce);
+  // };
   
   return (
     <Modal

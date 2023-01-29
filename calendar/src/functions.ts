@@ -56,7 +56,6 @@ export function getFullWeeksStartAndEndInMonth (date: Dayjs) {
   })
 }
 
-
 export const getStorageData = (keyName: string, defaultValue?: string | null) =>{
   const savedItem = localStorage.getItem(keyName);
   if (savedItem) {

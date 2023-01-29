@@ -10,6 +10,7 @@ import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRound
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { CalendarItem } from '../CalendarItem/CalendarItem';
 import { useStyles } from './styles';
+// import { getGlobalState } from '../useGlobalState'; // case for REST API
 
 export interface IEvent {
   id: Dayjs,
@@ -28,6 +29,7 @@ export const CalendarPage: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [action, setAction] = useState<IActionOfModal>('add');
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(getStorageData('selectedDate')) || dayjs());
+  // const [selectedDate, setSelectedDate] = getGlobalState('selectedDate'); //case for REST API
   const [weeks, setWeeks] = useState<Date[][]>(getFullWeeksStartAndEndInMonth(selectedDate as Dayjs));
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(null);
 
@@ -39,6 +41,7 @@ export const CalendarPage: React.FC = () => {
   const pagination = (step: number) => {
     const nextMonth = dayjs(selectedDate).month() + step;
     setSelectedDate(dayjs(selectedDate).set('month', nextMonth));
+    // setGlobalState('selectedDate', dayjs(selectedDate).set('month', nextMonth)); //case for REST API
   };
   
   useEffect(() => {
