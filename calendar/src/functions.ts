@@ -52,12 +52,6 @@ export function getFullWeeksStartAndEndInMonth (date: Dayjs) {
 
     return Array.from({length: 7}, (_, index) => {
       return new Date(year, month - sub, start + index);
-
-      // return {
-      //   date: date.getDate(),
-      //   month: date.toLocaleString('en', {month: 'long'}),
-      //   day: date.toLocaleString('en', {weekday: 'long'}),
-      // };
     });
   })
 }
@@ -72,5 +66,5 @@ export const getStorageData = (keyName: string, defaultValue?: string | null) =>
 }
 
 export const formatDate = (date: Dayjs | Date | undefined) => {
-  return date && dayjs(date).format('lll')
+  return date && dayjs(date).format('MM/DD/YYYY')
 }

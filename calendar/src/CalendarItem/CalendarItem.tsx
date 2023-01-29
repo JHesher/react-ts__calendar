@@ -6,8 +6,8 @@ import { useStyles } from './styles';
 import { IEvent } from '../CalendarPage/CalendarPage';
 
 type IProps = {
-  day: any,
-  setSelectedEvent: (value: any) => void,
+  day: Date,
+  setSelectedEvent: (value: IEvent) => void,
   setSelectedDate: (value: Dayjs) => void,
   handleOpen: (action: 'add' | 'edit') => void
 };

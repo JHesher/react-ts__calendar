@@ -4,11 +4,11 @@ import { DatePicker, LocalizationProvider, TimePicker } from '@mui/x-date-picker
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import dayjs, { Dayjs } from 'dayjs';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { IActionOfModal, IEvent } from '../CalendarPage/CalendarPage';
-import { formatDate, getStorageData } from '../functions';
+import { getStorageData } from '../functions';
 import { useStyles } from './styles';
 
 type IProps = {
@@ -32,7 +32,7 @@ export const EventFormModal: React.FC<IProps> = ({
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FieldValues) => {
     const year = dayjs(data.date).year();
     const month = dayjs(data.date).month();
     const day = dayjs(data.date).date();
@@ -92,6 +92,8 @@ export const EventFormModal: React.FC<IProps> = ({
         }
       }));
       closeModal();
+      localStorage.setItem('selectedDate', JSON.stringify(newEvent.date));
+      setSelectedDate(data.date);
       return;
     }
     localStorage.setItem('events', JSON.stringify(events));
@@ -105,7 +107,7 @@ export const EventFormModal: React.FC<IProps> = ({
     const filtredEvents = events[dayjs(selectedEvent?.date)
       .year()][dayjs(selectedEvent?.date)
         .month()][dayjs(selectedEvent?.date)
-          .date()].filter((value: any) => 
+          .date()].filter((value: IEvent) => 
       (value.id !== selectedEvent?.id)
     );
     events[dayjs(selectedEvent?.date)
@@ -138,11 +140,11 @@ export const EventFormModal: React.FC<IProps> = ({
           {action === 'edit' ? (
             <Box>
               <Typography className={classes.subtitle}>
-                {`Created at: ${formatDate(selectedEvent?.createdAt)}`}
+                {`Created at: ${dayjs(selectedEvent?.createdAt).format('lll')}`}
               </Typography>
               {selectedEvent?.updatedAt ? (
                 <Typography className={classes.subtitle}>
-                  {`Updated at: ${formatDate(selectedEvent?.updatedAt)}`}
+                  {`Updated at: ${dayjs(selectedEvent?.updatedAt).format('lll')}`}
                 </Typography>
               ) : null}
             </Box>

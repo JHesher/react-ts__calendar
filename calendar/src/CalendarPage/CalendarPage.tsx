@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { EventFormModal } from '../EventFormModal/EventFormModal';
-import { Box, Grid, styled, Button,  Typography } from '@mui/material';
+import { Box, Grid, Button,  Typography } from '@mui/material';
 import { getFullWeeksStartAndEndInMonth, getStorageData } from '../functions';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -15,8 +15,8 @@ export interface IEvent {
   id: Dayjs,
   title: string,
   description: string | null,
-  date: any,
-  time: any,
+  date: Date,
+  time: Date,
   createdAt: Dayjs,
   updatedAt: Dayjs
 }
@@ -27,7 +27,7 @@ export const CalendarPage: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
   const [action, setAction] = useState<IActionOfModal>('add');
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(getStorageData('selectedDate') || dayjs());
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(getStorageData('selectedDate')) || dayjs());
   const [weeks, setWeeks] = useState<Date[][]>(getFullWeeksStartAndEndInMonth(selectedDate as Dayjs));
   const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(null);
 
